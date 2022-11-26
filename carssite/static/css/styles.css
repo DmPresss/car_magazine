@@ -4,15 +4,15 @@ html, body {
 	padding: 0;
 	height: 100%;
 	width: 100%;
-	color: rgb(155, 179, 17);
+	color: rgb(169, 195, 20);
 }
 
 a {
-	color: #d2d427;
+	color: #0930e2;
 	text-decoration: none;
 }
 a:hover {
-	color: #a19f13;
+	color: #15053c;
 	text-decoration: underline;
 }
 
@@ -138,12 +138,12 @@ ul.langitem li.descr {
 	overflow: hidden;
 }
 ul.langitem li a {
-	color: #fdc073;
+	color: #171513;
 	text-decoration: none;
 	font-size: 20px;
 }
 ul.langitem li a:hover {
-	color: #FDA83D;
+	color: #11100f;
 }
 div.button {
 	background: #3F4137;
@@ -195,12 +195,12 @@ div.button {
 .left-chapters ul li.share a.share-yt {
 	width: 100%;
 	height: 30px;
-	background: url('../images/share_yt.png') no-repeat 0 0
+	background: url('../img/share_yt.png') no-repeat 0 0
 }
 .left-chapters ul li.share a.share-yt:hover {
 	width: 100%;
 	height: 30px;
-	background: url('../images/share_yt.png') no-repeat 0 -30px
+	background: url('../img/share_yt.png') no-repeat 0 -30px
 }
 
 .content {
@@ -356,9 +356,9 @@ ul.lang-list li a:hover {color: #fdc073;}
 #footer {
 	box-sizing: border-box;
 
-	background: #3F4137;
+	background: #110b7e;
 	padding: 5px;
-	color: #aaa;
+	color: #bdcf1a;
 	font-size: 14px;
 	font-family: Verdana, Geneva, Arial, Helvetica;
 	text-align: left;
@@ -366,7 +366,7 @@ ul.lang-list li a:hover {color: #fdc073;}
 }
 #footer a {
 	text-decoration: underline;
-	color: #aaa;
+	color:  #bdcf1a;
 }
 
 .form-input {
@@ -391,3 +391,43 @@ ul.lang-list li a:hover {color: #fdc073;}
     font-size: 16px;
 }
 
+.list-pages {
+	text-align: center;
+	margin: 0 0 20px 0;
+}
+.list-pages ul {
+	margin: 20px 0 0 0;
+	padding: 0;
+	list-style: none;
+}
+.list-pages ul li {
+	display: inline-block;
+	margin: 0 20px 0 0;
+}
+.list-pages a {
+	color: rgb(14, 11, 216);
+	font-size: 24px;
+	text-decoration: none;
+}
+.list-pages .page-num, .page-num-selected {
+	display: inline-block;
+	width: 60px;
+	height: 44px;
+	padding: 16px 0 0 0;
+	border: 1px solid #d0d0d0;
+	border-radius: 30px;
+}
+.list-pages .page-num:hover {
+	box-shadow: 3px 3px 1px #d0d0d0; 
+}
+.list-pages .page-num-selected {
+	border: none;
+	color: rgb(59, 13, 211);
+	font-size: 20px;
+}
+.list-pages .page-num-selected:hover {
+	box-shadow: none; 
+}
+
+header
+share

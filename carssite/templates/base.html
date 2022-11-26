@@ -22,17 +22,18 @@
                                 <div class="logo"></div>
                             </a></li>
                         {% for m in menu %}
-                        {% if not forloop.last %}
                         <li><a href="{% url m.url_name %}">{{m.title}}</a></li>
-                        {% else %}
-                        <li class="last"><a href="{% url m.url_name %}">{{m.title}}</a></li>
-                        {% endif %}
                         {% endfor %}
+                        {% if request.user.is_authenticated %}
+                        <li class="last">{{user.username}} | <a href="{% url 'cars:logout' %}">logout</a></li>
+                        {% else %}
+                        <li class="last"><a href="{% url 'cars:register' %}">Sign in</a> | <a
+                                href="{% url 'cars:login' %}">Login</a></li>
+                        {% endif %}
                     </ul>
                     <div class="clear"></div>
                 </div>
                 {% endblock mainmenu %}
-
                 <table class="table-content" border=0 cellpadding="0" cellspacing="0">
                     <tr>
                         <!-- Sidebar слева -->
@@ -52,26 +53,20 @@
                                 {% endif %}
                                 {% endfor %}
                                 <li class="share">
-                                    <p>Наш канал</p>
-                                    <a class="share-yt"
-                                        href="https://www.youtube.com/channel/UClJzWfGWuGJL2t-3dYKcHTA/playlists"
-                                        target="_blank" rel="nofollow"></a>
+                                    <p>3P Channel</p>
+                                    <a class="share-yt" href="https://www.youtube.com/@tvzrru/" target="_blank"
+                                        rel="nofollow"></a>
                                 </li>
                             </ul>
                         </td>
-                        <!-- Конец Sidebar'а -->
                         <td valign="top" class="content">
                             <!-- Хлебные крошки -->
                             {% block breadcrumbs %}
                             {% endblock %}
-
-                            <!-- Блок контента -->
                             <div class="content-text">
                                 {% block content %}
                                 {% endblock %}
                             </div>
-                            <!-- Конец блока контента -->
-
                         </td>
                     </tr>
                 </table>
@@ -81,13 +76,11 @@
         <tr>
             <td valign=top>
                 <div id="footer">
-                    <p>&copy; 2021 Частичное или полное копирование информации с данного сайта для распространения на
-                        других ресурсах, в том числе и бумажных, строго запрещено.</p>
+                    <p>&copy; 2022 All rights reserved. Authtor Dmirty Parkhomenko.</p>
                 </div>
             </td>
         </tr>
     </table>
-    <!-- Конец footer'а и страницы -->
 </body>
 
 </html>

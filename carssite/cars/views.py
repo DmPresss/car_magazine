@@ -1,26 +1,26 @@
+from django.contrib.auth import logout, login
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DeleteView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, FormView
+from django.db.models import Count
 
-from . models import Car, Category
+from . models import Car
 from . forms import *
-
-
-menu = [{'title': "About", 'url_name': 'cars:about'},
-        {'title': "Add Post", 'url_name': 'cars:addpost'},
-        {'title': "Feedback", 'url_name': 'cars:contact'},
-        {'title': "Signin", 'url_name': 'cars:login'}
-        ]
+from .  utils import *
 
 
 class CarIndex(ListView):
+    paginate_by: int = 3
     model = Car
     template_name = 'cars/index.html'
     context_object_name = 'posts'
 
     def get_context_data(self, *, object_list=None,  **kwargs):
         context = super().get_context_data(**kwargs)
+        context['header'] = str('All categories of cars :')
         context['menu'] = menu
         context['title'] = 'Main page'
         context['cat_selected'] = 0
@@ -32,13 +32,29 @@ class CarIndex(ListView):
 
 def about(request):  # HttpRequest
     context = {
-        'title': '!!ABOUT SITE PAGE',
+        'title': 'About author',
         'menu': menu
     }
     return render(request, 'cars/about.html', context)
 
 
-class AddPost(CreateView):
+class ContactFormView(FormView):
+    form_class = ContactForm
+    template_name = 'cars/contact.html'
+    success_url = reverse_lazy('cars:index')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        context['title'] = "Feedback"
+        return context
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return redirect('cars:index')
+
+
+class AddPost(LoginRequiredMixin, CreateView):
     form_class = AddPostForm
     template_name = 'cars/addpost.html'
     success_url = reverse_lazy('cars:index')
@@ -50,15 +66,7 @@ class AddPost(CreateView):
         return context
 
 
-def contact(request):
-    return HttpResponse('contacts')
-
-
-def login(request):
-    return HttpResponse('login')
-
-
-class ShowPost(DeleteView):
+class ShowPost(LoginRequiredMixin, DetailView):
     model = Car
     template_name = 'cars/post.html'
     slug_url_kwarg = 'post_slug'
@@ -75,10 +83,12 @@ class CarCategory(ListView):
     model = Car
     template_name = 'cars/index.html'
     context_object_name = 'posts'
-    allow_empty = False
+    paginate_by: int = 3
+    allow_empty = False  # will be returned 404
 
     def get_context_data(self, *, object_list=None,  **kwargs):
         context = super().get_context_data(**kwargs)
+        context['header'] = str(context['posts'][0].cat) + str(' category:')
         context['menu'] = menu
         context['title'] = str(context['posts'][0].cat)
         context['cat_selected'] = context['posts'][0].cat_id
@@ -86,6 +96,43 @@ class CarCategory(ListView):
 
     def get_queryset(self):
         return Car.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
+
+
+class RegisterUser(CreateView):
+    form_class = RegisterForm
+    template_name = 'cars/register.html'
+    success_url = reverse_lazy('cars:login')  # redirect
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = str("Sign in :))")
+        context['menu'] = menu
+        return context
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('cars:index')
+
+
+class LoginUser(LoginView):
+    form_class = LoginForm
+    template_name = 'cars/login.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        context['header'] = str("Please Login: ")
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('cars:index')
+    #LOGIN_REDIRECT_URL = '/' in setting.py
+
+
+def LoginoutUser(request):
+    logout(request)
+    return redirect('cars:login')
 
 
 def pageNotFound(request, exception):
@@ -135,6 +182,18 @@ def pageNotFound(request, exception):
 #         'cat_selected': cat.id,
 #     }
 #     return render(request, 'cars/index.html', context)
+
+# def contact(request):
+#     context = {
+#         'title': 'Contacts',
+#         'menu': menu
+#     }
+#     return render(request, 'cars/contact.html', context)
+
+
+# def login(request):
+    # return HttpResponse('login')
+
 
 # def addpost(request):
 #     # form = AddPostForm()

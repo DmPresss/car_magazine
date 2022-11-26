@@ -12,13 +12,15 @@ ALLOWED_HOSTS = ['127.0.0.1']
 
 
 INSTALLED_APPS = [
-    'cars.apps.CarsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
+    'captcha',
+    'cars.apps.CarsConfig',
 ]
 
 MIDDLEWARE = [
@@ -29,6 +31,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'carssite.urls'
@@ -89,3 +92,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'cars:login'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
