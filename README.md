@@ -48,13 +48,13 @@ $ source venv/bin/activate
 $ pip install -r requirements.txt
 
 ```
-go to root directory of the progect: 
+- go to root directory of the progect: 
 
 ```
 $ cd carssite 
 
 ```
-runserver: 
+- runserver: 
 
 ```
 python3 manage.py runserver
