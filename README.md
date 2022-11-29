@@ -19,6 +19,12 @@ Django==4.1.3
 $ git clone git@...
 
 ```
+- go to cloned directory 
+
+```
+$ cd car_magazine
+
+```
 - deploy the virtual environment
 
 ```
@@ -47,6 +53,12 @@ $ cd carssite
 
 ```
 $ python3 manage.py migrate
+
+```
+- you may upload origin db.sqlite3 and replace it in the project
+
+```
+https://drive.google.com/file/d/1NmDLjMIiH8AMLaENM3oXl5dWCyvWABWj/view?usp=share_link
 
 ```
 - runserver: 
