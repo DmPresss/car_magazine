@@ -12,14 +12,14 @@ Python  3.8.10
 Django==4.1.3
 
 ### preparation and installation of WebApp at the local host:
-```
+
 - clone the repository using SSH key
 
 ```
 $ git clone git@...
 
 ```
-- deploy the virtual environment:
+- deploy the virtual environment
 
 ```
 $ python3 -m venv venv
@@ -43,16 +43,12 @@ $ pip install -r requirements.txt
 $ cd carssite 
 
 ```
-<<<<<<< HEAD
 - carry out migrate
 
 ```
 $ python3 manage.py migrate
 
 ```
-
-=======
->>>>>>> 5efc4cb6d09f46f8c355a44cf85d23ae0454361a
 - runserver: 
 
 ```
