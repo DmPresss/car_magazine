@@ -43,6 +43,7 @@ $ pip install -r requirements.txt
 $ cd carssite 
 
 ```
+<<<<<<< HEAD
 - carry out migrate
 
 ```
@@ -50,6 +51,8 @@ $ python3 manage.py migrate
 
 ```
 
+=======
+>>>>>>> 5efc4cb6d09f46f8c355a44cf85d23ae0454361a
 - runserver: 
 
 ```
