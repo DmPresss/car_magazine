@@ -1,4 +1,3 @@
-
 # car_magazine
 WebApp about cars.
 
@@ -8,21 +7,11 @@ WebApp about cars.
 - Adding the posts and extended capabilities of WebApp will be available for authorized users only.
 ### technologies:
 
-Python==3.8.10
+Python  3.8.10
 
 Django==4.1.3
 
 ### preparation and installation of WebApp at the local host:
-- create directory:
-```
-$ mkdir folder
-
-```
-- go to created directory
-
-```
-$ cd folder
-
 ```
 - clone the repository using SSH key
 
@@ -39,7 +28,7 @@ $ python3 -m venv venv
 - activate the virtual environment:
 
 ```
-$ python3 -m venv venv
+$ source venv/bin/activate
 
 ```
 - install all requirements parameters:
@@ -48,16 +37,23 @@ $ python3 -m venv venv
 $ pip install -r requirements.txt
 
 ```
-go to root directory of the progect: 
+- go to root directory of the progect: 
 
 ```
 $ cd carssite 
 
 ```
-runserver: 
+- carry out migrate
 
 ```
-python3 manage.py runserver
+$ python3 manage.py migrate
+
+```
+
+- runserver: 
+
+```
+$ python3 manage.py runserver
 
 ```
 Enjoy :)
