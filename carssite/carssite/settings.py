@@ -21,6 +21,9 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'captcha',
     'cars.apps.CarsConfig',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'api.apps.ApiConfig'
 ]
 
 MIDDLEWARE = [
@@ -99,3 +102,13 @@ LOGIN_URL = 'cars:login'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}

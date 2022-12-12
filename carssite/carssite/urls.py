@@ -10,6 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('cars.urls', namespace='cars')),
     path('captcha/', include('captcha.urls')),
+    path('api/', include('api.urls')),  # new
 ]
 
 if settings.DEBUG:
