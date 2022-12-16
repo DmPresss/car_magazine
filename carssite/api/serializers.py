@@ -8,10 +8,8 @@ from cars.models import Car, Category
 class CarSerializer(serializers.ModelSerializer):
 
     author = SlugRelatedField(slug_field='username', read_only=True)
-    cat = serializers.SlugRelatedField(
+    cat = SlugRelatedField(
         slug_field='slug',  queryset=Category.objects.all())
-
-    # choices=CHOICES,
 
     class Meta:
         model = Car

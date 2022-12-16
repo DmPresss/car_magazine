@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class Category(models.Model):
@@ -25,6 +28,9 @@ class Car(models.Model):
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(
         default=True, verbose_name="Publication")
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE)
     cat = models.ForeignKey(
         Category, on_delete=models.PROTECT, verbose_name="Category")
 
