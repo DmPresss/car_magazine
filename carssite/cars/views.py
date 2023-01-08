@@ -59,6 +59,10 @@ class AddPost(LoginRequiredMixin, CreateView):
     template_name = 'cars/addpost.html'
     success_url = reverse_lazy('cars:index')
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
     def get_context_data(self, *, object_list=None,  **kwargs):
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
